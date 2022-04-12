@@ -78,7 +78,7 @@ $ sysdo cache [OPTIONS]
 
 **Options**:
 
-* `--cache-name TEXT`: [default: kclejeune]
+* `--cache-name TEXT`: [default: tarc]
 * `--help`: Show this message and exit.
 
 ## `sysdo clean`
