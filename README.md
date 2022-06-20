@@ -71,7 +71,7 @@ git clone https://github.com/kclejeune/system ~/.nixpkgs
 You can bootstrap a new nix-darwin system using
 
 ```bash
-nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstrap --darwin randall
+nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstrap --darwin air-silvia
 ```
 
 or a home-manager configuration using
