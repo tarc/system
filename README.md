@@ -77,7 +77,7 @@ nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstra
 or a home-manager configuration using
 
 ```bash
-nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstrap --home-manager [host]
+nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstrap --home-manager airSilvia
 ```
 
 ## `sysdo` CLI

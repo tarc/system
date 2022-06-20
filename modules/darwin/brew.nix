@@ -11,7 +11,6 @@
     ];
 
     taps = [
-      "1password/tap"
       "beeftornado/rmtree"
       "cloudflare/cloudflare"
       "homebrew/bundle"
@@ -25,8 +24,6 @@
     ];
     casks = [
       "hammerspoon"
-      "1password-cli"
-      "1password"
     ];
   };
 }

@@ -18,7 +18,6 @@ in
     ./cli
     ./dotfiles
     ./git.nix
-    ./1password
   ];
 
   nixpkgs.config = {
