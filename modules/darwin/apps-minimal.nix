@@ -4,7 +4,6 @@
       "alt-tab"
       "bartender"
       "firefox-beta"
-      "kitty"
       "raycast"
       "stats"
       "visual-studio-code"

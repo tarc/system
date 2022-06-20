@@ -16,7 +16,6 @@ in
   imports = [
     ./nvim
     ./cli
-    ./kitty
     ./dotfiles
     ./git.nix
     ./1password
