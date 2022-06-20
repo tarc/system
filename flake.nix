@@ -173,6 +173,7 @@
           ];
         };
         air-silvia = mkDarwinConfig {
+          system = "x86_64-darwin";
           extraModules = [
             ./profiles/personal.nix
             ./modules/darwin/apps.nix
