@@ -27,7 +27,7 @@ jobs:
             access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
       - uses: cachix/cachix-action@v10
         with:
-          name: kclejeune
+          name: tarc
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
           extraPullNames: nix-community
       - name: Run Flake Checks
