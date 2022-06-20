@@ -8,14 +8,14 @@
           "osxkeychain"
         else
           "cache --timeout=1000000000";
-      commit.verbose = true;
       fetch.prune = true;
       http.sslVerify = true;
       init.defaultBranch = "main";
-      pull.rebase = true;
-      push.followTags = true;
     };
     aliases = {
+      st = "status -s";
+      br = "branch -a";
+      ll = "log --graph --pretty=format:'%C(yellow)%h\\ %ad%Cred%d\\ %Creset%+s%Cblue\\ [%cn]' --decorate --numstat --date=short";
       fix = "commit --amend --no-edit";
       oops = "reset HEAD~1";
       sub = "submodule update --init --recursive";
