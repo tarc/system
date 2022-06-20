@@ -5,11 +5,8 @@
       "fork"
       "gpg-suite"
       "iina"
-      "jetbrains-toolbox"
-      "keybase"
       "skim"
       "syncthing"
-      "zoom"
     ];
     masApps = { };
   };
