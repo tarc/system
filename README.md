@@ -71,13 +71,19 @@ git clone https://github.com/kclejeune/system ~/.nixpkgs
 You can bootstrap a new nix-darwin system using
 
 ```bash
-nix --accept-flake-config --show-trace develop -c sysdo bootstrap --darwin silvia
+nix --accept-flake-config --show-trace develop -c sysdo bootstrap --darwin silvia@x86_64-darwin
 ```
 
 or a home-manager configuration using
 
 ```bash
 nix --extra-experimental-features "nix-command flakes" develop -c sysdo bootstrap --home-manager [host]
+```
+
+## GC
+
+```bash
+nix-collect-garbage -d
 ```
 
 ## `sysdo` CLI

@@ -109,7 +109,6 @@ in {
       shellcheck
       stylua
       sysdo
-      tex
       terraform
       tree
       treefmt
