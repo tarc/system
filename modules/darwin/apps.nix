@@ -6,14 +6,16 @@
 }: {
   homebrew = {
     casks = [
-      "discord"
-      "dropbox"
-      "google-drive"
-      "keybase"
-      "messenger"
-      "notion"
-      "signal"
-      "slack"
+      "adobe-acrobat-reader"
+      "gimp"
+      "skype"
+      "telegram"
+      "transmission"
+      "vlc"
+      "whatsapp"
+      "visual-studio-code"
+      "yacreader"
+      "zoom"
     ];
     masApps = {};
   };

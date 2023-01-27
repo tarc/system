@@ -2,11 +2,12 @@
   description = "nix system configurations";
 
   nixConfig = {
-    substituters = ["https://cache.nixos.org" "https://kclejeune.cachix.org"];
+    substituters = ["https://cache.nixos.org" "https://kclejeune.cachix.org" "https://tarc.cachix.org"];
 
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "kclejeune.cachix.org-1:fOCrECygdFZKbMxHClhiTS6oowOkJ/I/dh9q9b1I4ko="
+      "tarc.cachix.org-1:wIYVNrWvfOFESyas4plhMmGv91TjiTBVWB0oqf1fHcE="
     ];
   };
 
@@ -164,6 +165,10 @@
       });
 
     darwinConfigurations = {
+      "silvia@x86_64-darwin" = mkDarwinConfig {
+        system = "x86_64-darwin";
+        extraModules = [./profiles/silvia.nix ./modules/darwin/apps.nix];
+      };
       "kclejeune@aarch64-darwin" = mkDarwinConfig {
         system = "aarch64-darwin";
         extraModules = [./profiles/personal.nix ./modules/darwin/apps.nix];
@@ -199,6 +204,11 @@
     };
 
     homeConfigurations = {
+      "silvia@x86_64-darwin" = mkHomeConfig {
+        username = "silvia";
+        system = "x86_64-darwin";
+        extraModules = [./profiles/home-manager/silvia.nix];
+      };
       "kclejeune@x86_64-linux" = mkHomeConfig {
         username = "kclejeune";
         system = "x86_64-linux";

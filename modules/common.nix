@@ -49,6 +49,7 @@
       wget
       git
       jq
+      socat
 
       # helpful shell stuff
       bat

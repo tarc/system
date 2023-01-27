@@ -8,7 +8,6 @@
   homeDir = config.home.homeDirectory;
 in {
   imports = [
-    ./1password.nix
     ./bat.nix
     ./direnv.nix
     ./dotfiles
@@ -19,6 +18,7 @@ in {
     ./nvim
     ./shell.nix
     ./ssh.nix
+    ./texlive.nix
     ./tldr.nix
     ./tmux.nix
   ];
@@ -109,6 +109,7 @@ in {
       shellcheck
       stylua
       sysdo
+      tex
       terraform
       tree
       treefmt
