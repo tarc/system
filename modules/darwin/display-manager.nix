@@ -3,7 +3,7 @@
   #   brew "yabai", restart_service: "changed"
   # '';
   services.yabai = {
-    enable = true;
+    enable = false;
     config = {
       mouse_follows_focus = "off";
       focus_follows_mouse = "off";

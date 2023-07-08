@@ -5,12 +5,16 @@
     substituters = [
       "https://cache.nixos.org"
       "https://kclejeune.cachix.org"
+      "https://tarc.cachix.org"
     ];
 
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "kclejeune.cachix.org-1:fOCrECygdFZKbMxHClhiTS6oowOkJ/I/dh9q9b1I4ko="
+      "tarc.cachix.org-1:wIYVNrWvfOFESyas4plhMmGv91TjiTBVWB0oqf1fHcE="
     ];
+
+    extra-experimental-features = "nix-command flakes";
   };
 
   inputs = {
@@ -97,7 +101,7 @@
     # with overlays and any extraModules applied
     mkHomeConfig = {
       username,
-      system ? "x86_64-linux",
+      system ? "x86_64-darwin",
       nixpkgs ? inputs.nixpkgs,
       baseModules ? [
         ./modules/home-manager
@@ -125,7 +129,7 @@
     mkChecks = {
       arch,
       os,
-      username ? "kclejeune",
+      username ? "silvia",
     }: {
       "${arch}-${os}" = {
         "${username}_${os}" =
@@ -181,6 +185,10 @@
         system = "aarch64-darwin";
         extraModules = [./profiles/work.nix];
       };
+      "silvia@x86_64-darwin" = mkDarwinConfig {
+        system = "x86_64-darwin";
+        extraModules = [./profiles/tarcisio.nix ./modules/darwin/apps.nix];
+      };
     };
 
     nixosConfigurations = {
@@ -224,6 +232,11 @@
         username = "lejeukc1";
         system = "x86_64-linux";
         extraModules = [./profiles/home-manager/work.nix];
+      };
+      "silvia@x86_64-darwin" = mkHomeConfig {
+        username = "silvia";
+        system = "x86_64-darwin";
+        extraModules = [./profiles/home-manager/tarcisio.nix];
       };
     };
 
