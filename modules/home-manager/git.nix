@@ -21,7 +21,7 @@
       fix = "commit --amend --no-edit";
       st = "status -s";
       br = "branch -a";
-      ll = "log --graph --pretty=format:'%C(yellow)%h\\ %ad%Cred%d\\ %Creset%+s%Cblue\\ [%cn]' --decorate --numstat --date=short";
+      ll = "log --graph --pretty=format:'%C(yellow)%h %ad%Cred%d %Creset%+s%Cblue [%cn]' --decorate --numstat --date=short";
     };
     delta = {
       enable = false;
