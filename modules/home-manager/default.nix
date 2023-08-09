@@ -123,7 +123,7 @@
     jq.enable = true;
     java = {
       enable = true;
-      package = pkgs.jdk17;
+      package = pkgs.adoptopenjdk-bin;
     };
     k9s.enable = true;
     lazygit.enable = true;
