@@ -33,7 +33,7 @@
     # You can update Home Manager without changing this value. See
     # the Home Manager release notes for a list of state version
     # changes in each release.
-    stateVersion = "22.05";
+    stateVersion = "23.05";
     sessionVariables = {
       GPG_TTY = "/dev/ttys000";
       EDITOR = "nvim";
@@ -42,6 +42,7 @@
       LSCOLORS = "ExFxBxDxCxegedabagacad";
       KAGGLE_CONFIG_DIR = "${config.xdg.configHome}/kaggle";
       NODE_PATH = "${NODE_GLOBAL}/lib";
+      JAVA_OPTS = "-Xmx4G";
     };
     sessionPath = [
       "${NODE_GLOBAL}/bin"
@@ -56,7 +57,9 @@
       cb
       cirrus-cli
       comma
+      conan
       coreutils-full
+      coursier
       curl
       diffutils
       fd
@@ -67,7 +70,6 @@
       gnugrep
       gnupg
       gnused
-      google-cloud-sdk
       helm-docs
       httpie
       hurl
@@ -99,6 +101,7 @@
       rclone
       rsync
       (ruby.withPackages (ps: with ps; [rufo solargraph]))
+      sbt
       shellcheck
       stylua
       sysdo
@@ -126,14 +129,12 @@
       package = pkgs.adoptopenjdk-bin;
     };
     k9s.enable = true;
-    lazygit.enable = true;
     less.enable = true;
     man.enable = true;
     nix-index.enable = true;
     pandoc.enable = true;
     ripgrep.enable = true;
     starship.enable = true;
-    yt-dlp.enable = true;
     zathura.enable = true;
     zoxide.enable = true;
   };
