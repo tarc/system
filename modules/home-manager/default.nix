@@ -108,8 +108,6 @@
       terraform
       tree
       treefmt
-      trivy
-      vagrant
       yarn
       yq-go
     ];
