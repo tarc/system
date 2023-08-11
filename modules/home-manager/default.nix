@@ -87,7 +87,6 @@
       nixpkgs-fmt
       nodejs-18_x
       parallel
-      poetry
       pre-commit
       # python with default packages
       (python3.withPackages
