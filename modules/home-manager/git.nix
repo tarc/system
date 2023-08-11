@@ -1,10 +1,8 @@
 {pkgs, ...}: {
   home.packages = [pkgs.github-cli pkgs.git-crypt];
   programs.git = {
-    userName = "Kennan LeJeune";
     enable = true;
     aliases = {
-      ignore = "!gi() { curl -sL https://www.toptal.com/developers/gitignore/api/$@ ;}; gi";
     };
     extraConfig = {
       credential.helper =
@@ -21,8 +19,9 @@
     };
     aliases = {
       fix = "commit --amend --no-edit";
-      oops = "reset HEAD~1";
-      sub = "submodule update --init --recursive";
+      st = "status -s";
+      br = "branch -a";
+      ll = "log --graph --pretty=format:'%C(yellow)%h %ad%Cred%d %Creset%+s%Cblue [%cn]' --decorate --numstat --date=short";
     };
     delta = {
       enable = false;

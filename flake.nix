@@ -120,7 +120,7 @@
     mkChecks = {
       arch,
       os,
-      username ? "kclejeune",
+      username ? "silvia",
     }: {
       "${arch}-${os}" = {
         "${username}_${os}" =
@@ -160,6 +160,10 @@
       });
 
     darwinConfigurations = {
+      "silvia@x86_64-darwin" = mkDarwinConfig {
+        system = "x86_64-darwin";
+        extraModules = [./profiles/tarcisio.nix ./modules/darwin/apps.nix];
+      };
       "kclejeune@aarch64-darwin" = mkDarwinConfig {
         system = "aarch64-darwin";
         extraModules = [./profiles/personal.nix ./modules/darwin/apps.nix];
@@ -195,6 +199,11 @@
     };
 
     homeConfigurations = {
+      "silvia@x86_64-darwin" = mkHomeConfig {
+        username = "silvia";
+        system = "x86_64-darwin";
+        extraModules = [./profiles/home-manager/tarcisio.nix];
+      };
       "kclejeune@x86_64-linux" = mkHomeConfig {
         username = "kclejeune";
         system = "x86_64-linux";
