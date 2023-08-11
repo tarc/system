@@ -55,6 +55,7 @@
       alejandra
       cachix
       cb
+      conan
       coreutils-full
       curl
       diffutils
