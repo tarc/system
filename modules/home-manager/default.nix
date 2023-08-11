@@ -51,42 +51,27 @@
 
     # define package definitions for current user environment
     packages = with pkgs; [
-      awscli2
       # age
       alejandra
       cachix
       cb
-      cirrus-cli
-      comma
       coreutils-full
       curl
       diffutils
       fd
       ffmpeg
       findutils
-      flyctl
       gawk
       gnugrep
       gnupg
       gnused
-      google-cloud-sdk
-      helm-docs
       httpie
-      hurl
-      kubectl
-      kubectx
-      kubernetes-helm
-      kustomize
-      lazydocker
-      luajit
-      mmv
       ncdu
       neofetch
       nix
       nixfmt
       nixpkgs-fmt
       nodejs-18_x
-      parallel
       pre-commit
       # python with default packages
       (python3.withPackages
@@ -97,20 +82,12 @@
             matplotlib
             networkx
           ]))
-      ranger
-      rclone
       rsync
       (ruby.withPackages (ps: with ps; [rufo solargraph]))
-      shellcheck
       stylua
       sysdo
-      terraform
       tree
       treefmt
-      trivy
-      vagrant
-      yarn
-      yq-go
     ];
   };
 
@@ -119,7 +96,7 @@
       enable = true;
     };
     dircolors.enable = true;
-    go.enable = true;
+    go.enable = false;
     gpg.enable = true;
     htop.enable = true;
     jq.enable = true;
@@ -127,15 +104,15 @@
       enable = true;
       package = pkgs.jdk17;
     };
-    k9s.enable = true;
-    lazygit.enable = true;
+    k9s.enable = false;
+    lazygit.enable = false;
     less.enable = true;
     man.enable = true;
     nix-index.enable = true;
     pandoc.enable = true;
     ripgrep.enable = true;
     starship.enable = true;
-    yt-dlp.enable = true;
+    yt-dlp.enable = false;
     zathura.enable = true;
     zoxide.enable = true;
   };

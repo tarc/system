@@ -53,7 +53,6 @@
 
       # vim addon utilities
       direnv-vim
-      ranger-vim
     ];
     extraConfig = ''
       ${config.lib.vimUtils.readVimConfig ./settings.lua}

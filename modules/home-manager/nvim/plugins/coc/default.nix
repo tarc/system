@@ -23,7 +23,6 @@
       coc-eslint
       coc-fzf
       coc-git
-      coc-go
       coc-html
       coc-java
       coc-json
