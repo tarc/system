@@ -72,6 +72,7 @@
       nixfmt
       nixpkgs-fmt
       nodejs-18_x
+      nodejs-18_x.pkgs.pnpm
       pre-commit
       # python with default packages
       (python3.withPackages
