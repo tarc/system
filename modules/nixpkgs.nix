@@ -14,7 +14,7 @@
       experimental-features = nix-command flakes
     '';
     settings = {
-      max-jobs = 8;
+      max-jobs = 4;
       trusted-users = ["${config.user.name}" "root" "@admin" "@wheel"];
       trusted-substituters = [
         "https://cache.nixos.org"
