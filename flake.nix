@@ -184,6 +184,13 @@
     };
 
     nixosConfigurations = {
+      "nixos@x86_64-linux" = mkNixosConfig {
+        system = "x86_64-linux";
+        hardwareModules = [
+          ./modules/hardware/phil.nix
+        ];
+        extraModules = [./profiles/nixos.nix];
+      };
       "kclejeune@x86_64-linux" = mkNixosConfig {
         system = "x86_64-linux";
         hardwareModules = [
@@ -203,6 +210,11 @@
       "silvia@x86_64-darwin" = mkHomeConfig {
         username = "silvia";
         system = "x86_64-darwin";
+        extraModules = [./profiles/home-manager/tarcisio.nix];
+      };
+      "nixos@x86_64-linux" = mkHomeConfig {
+        username = "nixos";
+        system = "x86_64-linux";
         extraModules = [./profiles/home-manager/tarcisio.nix];
       };
       "kclejeune@x86_64-linux" = mkHomeConfig {
