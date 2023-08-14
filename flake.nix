@@ -12,12 +12,17 @@
   inputs = {
     # package repos
     stable.url = "github:nixos/nixpkgs/nixos-23.05";
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:tarc/nixpkgs/ncdu-force-pie-darwin";
     nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     devenv.url = "github:cachix/devenv/latest";
 
     # system management
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +43,7 @@
     devenv,
     flake-utils,
     home-manager,
+    vscode-server,
     ...
   } @ inputs: let
     inherit (flake-utils.lib) eachSystemMap;
@@ -121,7 +127,7 @@
     mkChecks = {
       arch,
       os,
-      username ? "silvia",
+      username ? "kclejeune",
     }: {
       "${arch}-${os}" = {
         "${username}_${os}" =
@@ -143,6 +149,11 @@
   in {
     checks =
       {}
+      // (mkChecks {
+        arch = "x86_64";
+        os = "linux";
+        username = "nixos";
+      })
       // (mkChecks {
         arch = "aarch64";
         os = "darwin";
@@ -184,6 +195,16 @@
     };
 
     nixosConfigurations = {
+      "nixos@x86_64-linux" = mkNixosConfig {
+        system = "x86_64-linux";
+        nixpkgs = inputs.stable;
+        hardwareModules = [
+        ];
+        extraModules = [
+          ./profiles/nixos.nix
+          vscode-server.nixosModules
+        ];
+      };
       "kclejeune@x86_64-linux" = mkNixosConfig {
         system = "x86_64-linux";
         hardwareModules = [
@@ -204,6 +225,13 @@
         username = "silvia";
         system = "x86_64-darwin";
         extraModules = [./profiles/home-manager/tarcisio.nix];
+      };
+      "nixos@x86_64-linux" = mkHomeConfig {
+        username = "nixos";
+        system = "x86_64-linux";
+        extraModules = [
+          ./profiles/home-manager/wsl.nix
+        ];
       };
       "kclejeune@x86_64-linux" = mkHomeConfig {
         username = "kclejeune";

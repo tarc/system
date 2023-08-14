@@ -16,6 +16,7 @@
     ./ssh.nix
     ./tldr.nix
     ./tmux.nix
+    ./vscode-remote
   ];
 
   nixpkgs.config = {
@@ -90,6 +91,7 @@
       sysdo
       tree
       treefmt
+      wget
     ];
   };
 
