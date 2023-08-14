@@ -14,6 +14,8 @@
     dataDir = config.user.home;
   };
 
+  services.vscode-server.enable = false;
+
   environment.systemPackages = with pkgs; [vscode firefox gnome.gnome-tweaks];
 
   hm = {...}: {imports = [../home-manager/gnome];};

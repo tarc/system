@@ -16,11 +16,14 @@
     ./ssh.nix
     ./tldr.nix
     ./tmux.nix
+    ./vscode-remote
   ];
 
   nixpkgs.config = {
     allowUnfree = true;
   };
+
+  services.vscode-server.enable = true;
 
   home = let
     NODE_GLOBAL = "${config.home.homeDirectory}/.node-packages";

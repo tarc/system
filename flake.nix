@@ -18,6 +18,11 @@
 
     # system management
     nixos-hardware.url = "github:nixos/nixos-hardware";
+    vscode-server = {
+      url = "github:nix-community/nixos-vscode-server";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
     darwin = {
       url = "github:lnl7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,6 +43,7 @@
     devenv,
     flake-utils,
     home-manager,
+    vscode-server,
     ...
   } @ inputs: let
     inherit (flake-utils.lib) eachSystemMap;
@@ -189,7 +195,10 @@
         hardwareModules = [
           ./modules/hardware/phil.nix
         ];
-        extraModules = [./profiles/nixos.nix];
+        extraModules = [
+          ./profiles/nixos.nix
+          vscode-server.nixosModules
+        ];
       };
       "kclejeune@x86_64-linux" = mkNixosConfig {
         system = "x86_64-linux";
