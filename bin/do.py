@@ -61,13 +61,23 @@ def test_cmd(cmd: List[str]):
     return subprocess.run(cmd).returncode == 0
 
 
-def run_cmd(cmd: List[str], shell=False):
-    typer.secho(fmt_command(cmd), fg=Colors.INFO.value)
-    return (
-        subprocess.run(" ".join(cmd), shell=True)
-        if shell
-        else subprocess.run(cmd, shell=False)
-    )
+def run_cmd(cmd: List[str], shell=False, impure=False, allow_insecure=False):
+    custom_environ = os.environ
+    command = cmd
+
+    if allow_insecure:
+        impure = True
+        custom_environ = {**custom_environ, "NIXPKGS_ALLOW_INSECURE": "1"}
+
+    if impure:
+        command = command + ["--impure"]
+
+    typer.secho(fmt_command(command), fg=Colors.INFO.value)
+
+    if shell:
+        command = " ".join(command)
+
+    return subprocess.run(command, shell=shell, env=custom_environ)
 
 
 def select(nixos: bool, darwin: bool, home_manager: bool):
@@ -104,6 +114,8 @@ def bootstrap(
     nixos: bool = False,
     darwin: bool = False,
     home_manager: bool = False,
+    impure: bool = False,
+    allow_insecure: bool = False,
 ):
     cfg = select(nixos=nixos, darwin=darwin, home_manager=home_manager)
     flags = [
@@ -130,14 +142,20 @@ def bootstrap(
     elif cfg == FlakeOutputs.DARWIN:
         disk_setup()
         flake = f"{bootstrap_flake}#{cfg.value}.{host}.config.system.build.toplevel"
-        run_cmd(["nix", "build", flake] + flags)
         run_cmd(
-            f"./result/sw/bin/darwin-rebuild switch --flake {FLAKE_PATH}#{host}".split()
+            ["nix", "build", flake] + flags,
+            impure=impure,
+            allow_insecure=allow_insecure,
+        )
+        run_cmd(
+            f"./result/sw/bin/darwin-rebuild switch --flake {FLAKE_PATH}#{host}".split(),
+            impure=impure,
+            allow_insecure=allow_insecure,
         )
     elif cfg == FlakeOutputs.HOME_MANAGER:
         flake = f"{bootstrap_flake}#{host}"
         run_cmd(
-            ["nix", "run"]
+            cmd=["nix", "run"]
             + flags
             + [
                 "github:nix-community/home-manager",
@@ -148,7 +166,9 @@ def bootstrap(
                 flake,
                 "-b",
                 "backup",
-            ]
+            ],
+            impure=impure,
+            allow_insecure=allow_insecure,
         )
     else:
         typer.secho("could not infer system type.", fg=Colors.ERROR.value)
@@ -170,6 +190,8 @@ def build(
     nixos: bool = False,
     darwin: bool = False,
     home_manager: bool = False,
+    impure: bool = False,
+    allow_insecure: bool = False,
 ):
     cfg = select(nixos=nixos, darwin=darwin, home_manager=home_manager)
     if cfg is None:
@@ -190,7 +212,7 @@ def build(
         flake = f"{FLAKE_PATH}#{host}"
 
     flags = ["--show-trace"]
-    run_cmd(cmd + [flake] + flags)
+    run_cmd(cmd + [flake] + flags, impure=impure, allow_insecure=allow_insecure)
 
 
 @app.command(
@@ -256,18 +278,28 @@ def update(
         help="specify an individual flake to be updated",
     ),
     commit: bool = typer.Option(False, help="commit the updated lockfile"),
+    impure: bool = False,
+    allow_insecure: bool = False,
 ):
     flags = ["--commit-lock-file"] if commit else []
     if not flake:
         typer.secho("updating all flake inputs")
-        run_cmd(["nix", "flake", "update"] + flags)
+        run_cmd(
+            ["nix", "flake", "update"] + flags,
+            impure=impure,
+            allow_insecure=allow_insecure,
+        )
     else:
         inputs = []
         for input in flake:
             inputs.append("--update-input")
             inputs.append(input)
         typer.secho(f"updating {', '.join(flake)}")
-        run_cmd(["nix", "flake", "lock"] + inputs + flags)
+        run_cmd(
+            ["nix", "flake", "lock"] + inputs + flags,
+            impure=impure,
+            allow_insecure=allow_insecure,
+        )
 
 
 @app.command(help="pull changes from remote repo", hidden=not is_local)
