@@ -17,6 +17,11 @@
     settings = {
       max-jobs = 4;
       trusted-users = ["${config.user.name}" "root" "@admin" "@wheel"];
+      substituters = [
+        "https://cache.nixos.org"
+        "https://kclejeune.cachix.org"
+        "https://tarc.cachix.org"
+      ];
       trusted-substituters = [
         "https://cache.nixos.org"
         "https://kclejeune.cachix.org"

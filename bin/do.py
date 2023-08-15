@@ -120,10 +120,8 @@ def bootstrap(
     cfg = select(nixos=nixos, darwin=darwin, home_manager=home_manager)
     flags = [
         "-v",
-        "--experimental-features",
+        "--extra-experimental-features",
         "nix-command flakes",
-        "--extra-substituters",
-        "https://kclejeune.cachix.org",
     ]
 
     bootstrap_flake = REMOTE_FLAKE if remote else FLAKE_PATH
