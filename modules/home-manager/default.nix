@@ -62,6 +62,7 @@
       coreutils-full
       curl
       diffutils
+      graphviz
       fd
       ffmpeg
       findutils
@@ -73,6 +74,7 @@
       ncdu
       neofetch
       nix
+      nix-du
       nixfmt
       nixpkgs-fmt
       nodejs-18_x
