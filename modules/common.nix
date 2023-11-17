@@ -66,6 +66,7 @@
       # languages
       python3
       ruby
+      cmake
     ];
     etc = {
       home-manager.source = "${inputs.home-manager}";

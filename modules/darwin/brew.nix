@@ -15,6 +15,7 @@
     ];
     casks = [
       "alt-tab"
+      "docker"
       "google-chrome"
       "visual-studio-code"
     ];
